@@ -99,13 +99,16 @@ def user_profile(request, pk):
 
     return render(request, 'base/profile.html', context)
 
+
 @login_required(login_url='login')
 def create_room(request):
     form = RoomForm()
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
+            room = form.save(commit=False)
+            room.host = request.user
+            room.save()
             return redirect('home')
 
     context = {'form': form}
@@ -141,6 +144,7 @@ def delete_room(request, pk):
         room.delete()
         return redirect('home')
     return render(request, 'base/delete.html', {'obj': room})
+
 
 @login_required(login_url='login')
 def delete_message(request, pk):

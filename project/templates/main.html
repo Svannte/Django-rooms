@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 
 <head>
     <meta charset='utf-8'>
     <title>ProjectSV</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/main.css' %}">
 </head>
 
 <body>
@@ -16,6 +18,8 @@
         {% endfor %}
     </ul>
     {% endif %}
+
+    <!--<img src="{% static 'images/sample_image.png' %}">-->
 
     {% block content %}
 
